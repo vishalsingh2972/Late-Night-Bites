@@ -1,9 +1,8 @@
-# 🌶️ Late Night Bites -  For the Late night hunger cravings
+# 🌶️ Late Night Bites - For the Late Night Hunger Cravings
 
-> ## Ultra-Low Latency Bidirectional Real-Time Streaming AI Delivery Agent
+> ## Inbound Voice-Driven Autonomous AI Commerce Agent
 > 
-> 
-> **Late Night Bites** is a high-performance voice-first orchestration system designed to eliminate high-friction, late-night residential apartment delivery gate-checks. Built on pure WebSockets, it routes full-duplex telephony streams through ultra-low latency speech and cognition layers to resolve food delivery interruptions instantly.
+> **Late Night Bites** is a high-performance, asynchronous orchestration system designed to turn casual voice inputs into fully executed food orders with zero application UI interaction. Operating via a hybrid TypeScript/Python microservice architecture, it captures incoming audio message payloads from communication apps, runs an autonomous negotiation loop, matches budgets and real-time restaurant performance parameters, and checks out orders entirely in the background.
 
 ---
 
@@ -11,25 +10,26 @@
 
 ```mermaid
 flowchart TD
-    A["🛵 Swiggy Partner Assign Event / API Hook"] -->|Triggers Action| B["📞 Twilio Telephony Ingress Layer"]
-    B -->|Establishes Full-Duplex WebSockets| C["⚡ Fastify WebSocket Orchestrator (TypeScript)"]
+    A["📱 User (Tired/Working Late)"] -->|Sends WhatsApp Audio Message| B["💬 WhatsApp Business Ingress (Twilio API)"]
+    B -->|Webhook Trigger + Media Payload| C["⚡ Fastify Media Gateway (TypeScript)"]
     
-    subgraph Core_Engine ["🚀 Async Streaming Audio Loop"]
-        C -->|Pipes 8kHz mulaw chunks| D["🗣️ Smallest AI Pulse STT (wss)"]
-        D -->|Instant Text Tokens ~64ms| E["🧠 Gemini 2.0 Flash (Streaming SSE)"]
-        E -->|Text Stream Out| F["🎙️ Smallest AI Lightning V3.1 (wss)"]
-        F -->|Raw Audio Buffers ~100ms| C
+    subgraph Conversation_Engine ["🚀 Conversational Voice Pipeline"]
+        C -->|Extracts Audio Binary Buffer| D["🗣️ Smallest AI Pulse STT"]
+        D -->|Instant Text Transcripts| E["🧠 Gemini 2.0 Flash (Multi-Turn Context)"]
+        E -->|Text Stream / Outbound Audio| F["🎙️ Smallest AI Lightning V3.1"]
+        F -->|Synthesized Speech Buffers| C
     end
     
-    C -->|Pipes Outbound Audio Packets| B
-    B -->|Live Call Track| G["📱 Customer Phone (Speakerphone)"]
+    C -->|Pipes Voice/Text Responses| B -->|Interactive Follow-up Audio| A
     
-    subgraph Data_Orchestration ["🐍 Processing & Coordination Layer"]
-        C -->|Event Stream Context Hooks| H["🐍 FastAPI Event Bridge (Python)"]
-        H -->|Asynchronous State Control| I["🛠️ Swiggy Gate-Pass/Order Mock Service"]
+    subgraph Autonomous_Execution ["🐍 Agentic Commerce Layer"]
+        E -->|Extracted Parameters: Budget/Cravings| G["🐍 FastAPI Business Router (Python)"]
+        G -->|State Machine Orchestration| H["🤖 LangGraph Autonomous Coordinator"]
+        H -->|Tool Call: Query Open Restaurants| I["🍔 Swiggy Merchant Sandbox Engine"]
+        H -->|Tool Call: Checkout & Place Order| J["💳 Pre-Authorized Payment Engine"]
     end
     
-    G -->|Natural Speech / Slang| B
+    J -->|Order Confirmation Webhook| G -->|Push Notification Frame| C
 
 ```
 
@@ -37,32 +37,41 @@ flowchart TD
 
 ## 📌 Project Overview
 
-**Late Night Bites** intercepts structural friction inside the conversational commerce ecosystem. Instead of forcing a delivery partner to wait indefinitely at an apartment gate or calling the customer via a laggy, high-latency baseline menu system, this architecture acts as an instant conversational link.
+**Late Night Bites** eliminates structural decision fatigue and application friction when ordering food late at night. Instead of forcing an exhausted user to swipe through user interfaces, evaluate item lists, compare delivery timelines, and process standard payment screens, this architecture reduces the entire transaction to a natural, chat-based audio interface.
 
-When the system triggers an outbound call, it establishes a live, bi-directional persistent connection. The customer answers, hears a human-like Indic voice with natural local syntax, speaks naturally (blending English and localized terms), and provides the necessary credentials (like gate passes or instruction overrides). The system processes the audio, updates the mock delivery platform state, and guides the delivery partner forward—all wrapped up in a sub-second processing envelope.
+The user initiates the process by dropping a single, unstructured audio message. The backend coordinates the audio translation, extracts intent parameters, and boots up an isolated execution worker state machine. The agent actively queries open venues, optimizes the order path against the user's explicit budget constraints, performs the checkout sequence independently, and sends back confirmation, allowing the user to rest uninterrupted until the delivery arrives.
 
 ---
 
 ## 👩‍💼 Real-World Example: Harshitha in a Bangalore PG
 
-> “Harshitha is a software developer living in a strict high-rise PG in HSR Layout, Bangalore. It’s 1:30 AM, she’s exhausted after a long production deployment shift, and she just ordered a cheap midnight meal on Swiggy.
-> The delivery partner arrives at the main security gate, but the security guard blocks entry, demanding a MyGate token number or pass validation code before lifting the boom barrier. Rather than forcing the driver to struggle with the app or making Harshitha pick up a tedious standard voice line, **Late Night Bites** instantly fires an automated outbound ring to Harshitha's phone.
-> She answers. A natural, friendly Indian voice speaks instantly:
-> *'Hey Harshitha! I'm your Swiggy partner at your PG gate right now. Security uncle isn't letting me lift the gate without an entry code. Can you share the pass number?'*
-> Harshitha doesn't need to open an application. She just says naturally: *'Oh, entry code is 4-2-9-1. Just tell him that.'*
-> On her desk, a live terminal monitor shows the raw binary audio streaming down. Within **~64ms**, `Pulse STT` transcribes her speech, `Gemini 2.0 Flash` extracts the exact intent, and `Lightning V3.1` delivers a voice response back to her ear: *'Got it, 4291! Telling him now and coming up to the third floor.'* >
-> The mock gate pass is automatically marked as authorized, the gate clears, and her food is delivered without her ever having to break her workflow.”
+> “Harshitha is a software developer living in a strict high-rise PG in HSR Layout, Bangalore. It’s 1:30 AM, she’s completely exhausted after a brutal production deployment shift, and she is starving. The absolute last thing she has the energy for is opening an app, filtering through 50 open restaurants, looking at items, checking delivery wait-times, and typing in payment details.
+> She opens WhatsApp and drops a casual, groggy 4-second voice note:
+> *'Bro, I'm super hungry, get me something.'*
+> She locks her phone and sets it down. Behind the scenes, **Late Night Bites** catches the media webhook. In **~64ms**, `Pulse STT` transcribes the sound, and `Gemini 2.0 Flash` handles the greeting response. Her phone chiming wakes her as an empathetic audio response returns:
+> *'Hey Harshitha! Let's get you fed. What's the budget tonight, and do you want to reorder from your last spot or try something entirely new?'*
+> Harshitha sends back a quick follow-up audio clip:
+> *'Feel like eating biryani. Any good place under 300 rupees. Fastest delivery, just order it directly.'*
+> That is her final interaction. The **Python LangGraph Engine** instantly spins up an autonomous routing routine:
+> 1. It pulls her pre-saved PG location coordinates.
+> 2. It scans active local merchants, filtering for open biryani hubs under a ₹300 price ceiling.
+> 3. It targets the optimal vendor (e.g., *Empire Restaurant* or *Biryani Zone*) based strictly on the shortest delivery time matrix.
+> 4. It builds the cart, executes a secure, pre-authorized checkout pipeline, and triggers the active delivery tracking thread.
+> 
+> 
+> Harshitha receives a clean text summary: *'Done! Ordered Chicken Biryani from Empire. Total ₹240. Will be at your door in 22 mins. Go take a nap, I'll alert you when he hits the gate.'*
+> She takes a 20-minute nap, completely bypasses application logistics, and wakes up directly to a knock on the door with hot food ready.”
 
 ---
 
 ## 💭 The Problem Space
 
-Engineers building real-time voice products face intense infrastructural constraints:
+Developers engineering multi-turn voice-first commerce systems encounter several severe design and systemic bottlenecks:
 
-* **Gateway Timeouts:** Standard REST/HTTP paradigms fail because waiting for an entire sentence to finish before processing creates an immediate 2 to 3-second lag, destroying conversational naturalness.
-* **Audio Codec Jitter:** Telephony standards rely on raw **8kHz `mulaw` (PCMU)** streams, whereas modern machine learning systems often assume pristine `linear16` or `PCM` parameters. Conversion overhead can freeze the event loop.
-* **The Interruption Problem:** If an AI agent is speaking a long sentence and the human interrupts mid-way, classic batch pipelines cannot break the queue, resulting in overlapping voices.
-* **Multi-Language Shifts:** Indian delivery scenarios rely heavily on rapid code-switching (Hinglish/Tenglish blends) that standard models fail to parse at speed.
+* **Payload Serialization Overheads:** Intercepting unstructured chat media attachments requires handling raw multi-part form data quickly to secure binary components before downstream timeouts kick in.
+* **Deterministic Parameter Extraction:** LLMs frequently fail to extract structured boundary conditions (like hard cost limits or strict cuisine parameters) from highly informal, multi-lingual local phrasing without rigorous system prompting.
+* **State Machine Consistency:** When an autonomous loop takes over financial checkouts, handling edge cases—such as a specific restaurant closing mid-search or payment tokens expiring—requires state managers that prevent invalid or double orders.
+* **Multi-Language Processing:** Late-night consumer requests often rely on rapid code-switching (Hinglish/Telugu-English blends) that must be cleanly mapped to strict API schemas.
 
 ---
 
@@ -70,49 +79,54 @@ Engineers building real-time voice products face intense infrastructural constra
 
 | Layer | Technology | Engineering Selection Reason | Free Tier Limits (2026) |
 | --- | --- | --- | --- |
-| **Orchestration** | **Node.js + Fastify** | High-throughput async routing layer optimized for raw WebSocket connection pooling over standard Express. | `$0` (Local Execution) |
-| **Event Bridge** | **Python + FastAPI** | Handles deep data validation pipelines, mock third-party status mapping, and background utility worker scripts. | `$0` (Local Execution) |
-| **Ingress/Egress** | **Twilio Media Streams** | Delivers bi-directional full-duplex raw audio chunking inside structural `<Connect><Stream>` parameters. | `$15 Trial Balance` |
-| **Perception** | **Smallest AI Pulse STT** | Dedicated low-latency streaming speech node returning rapid live text tokens over WebSockets. | `30 Minutes / Month` (Max 2 concurrent streams) |
-| **Cognition** | **Gemini 2.0 Flash** | Server-Sent Events (SSE) text stream engine acting as the low-latency cognitive anchor via the Google AI Studio SDK. | `15 RPM` (Requests Per Minute) |
-| **Voice Synthesis** | **Smallest AI Lightning V3.1** | Blazing-fast speech synthesis processing streamed text back into playable audio bytes. | Shared pool in `30 Mins/Mo` allocation |
+| **Ingress Gate** | **WhatsApp Business API via Twilio** | Serves as the primary user layer, removing custom app build dependencies by moving the UI to a chat window. | `$15 Trial Balance Pool` |
+| **Media Router** | **Node.js + Fastify** | High-speed multi-part webhook ingestion layer designed to handle inbound media streams with minimal memory impact. | `$0` (Local Development) |
+| **Perception Node** | **Smallest AI Pulse STT** | High-performance transcription system that converts casual voice audio streams into text tokens with deep dialect parsing. | `30 Minutes / Month` (Max 2 concurrent streams) |
+| **Cognitive Core** | **Gemini 2.0 Flash** | Selected for rapid context window changes and low token response times via the Google AI Studio SDK. | `15 RPM` (Requests Per Minute) |
+| **Execution Loop** | **Python + FastAPI + LangGraph** | Provides structured cyclic tracking, reliable fallback controls, and robust tool integration patterns for multi-step agent actions. | `$0` (Local Development) |
+| **Synthesis Node** | **Smallest AI Lightning V3.1** | Transforms generated dynamic responses back into natural, expressive audio packets. | Shared pool in `30 Mins/Mo` allocation |
 
 ---
 
-## 📋 Telephony State Machine & Packet Lifecycle
+## 📋 Conversational Logic & State Transitions
 
 ```txt
-[Inbound Twilio Stream Frame] ──> Base64 Decode ──> [Raw mulaw Audio Buffer]
-                                                             │
-                                                     (Piped via WebSockets)
-                                                             ▼
-                                                [Smallest AI Pulse STT Node]
-                                                             │
-                                                  (Partial Text Token Emits)
-                                                             ▼
-                                                [Gemini 2.0 Flash Core Engine]
-                                                             │
-                                                  (Streaming Text Outputs)
-                                                             ▼
-                                                [Smallest AI Lightning V3.1]
-                                                             │
-                                                   (Raw Playback Audio Chunks)
-                                                             ▼
-[Twilio Audio Track Egress] <── Base64 Encode <── [Output Buffer Construction]
+[User Input Audio Drop] ──> Webhook Ingestion ──> Audio Buffer Isolation
+                                                         │
+                                               (Pulse STT Processing)
+                                                         ▼
+                                             [Extract Intention String]
+                                                         │
+                                             (Gemini Context Evaluation)
+                                                         ▼
+                                       { State Evaluation: Missing Values? }
+                                         ╱                                ╲
+                                       ⎗                                   ⎘
+                                 [Yes: Missing Data]               [No: Profile Complete]
+                                       │                                   │
+                           (Generate Text Stream)                 (Boot Execution Thread)
+                                       ▼                                   ▼
+                           [Smallest AI Lightning TTS]             [LangGraph Toolkit Node]
+                                       │                                   │
+                            (Outbound Audio Reply)                (Query/Filter Sandbox)
+                                       ▼                                   ▼
+                            "What is your budget?"                [Execute Automated Cart]
 
 ```
 
 ---
 
-## 🚀 Key Engineering Learnings Expected
+## 🚀 Key Engineering Learnings Achieved
 
-* **Bi-directional WebSocket Orchestration:** Building continuous async connections that process live input/output simultaneously without blocking the single-threaded Node event loop.
-* **Telephony Byte Handling:** Mastering real-time data ingestion, processing raw base64 structural payloads, and interacting natively with telephony network configurations.
-* **State Interruption Paradigms:** Implementing immediate cache invalidation and sequence clearing logic to instantly halt outbound AI audio frames when incoming user voice metrics are detected.
-* **Multi-Runtime Communication:** Building low-overhead transport architectures to bind high-speed TypeScript network interfaces smoothly with async Python processing scripts.
+* **Unstructured Inbound Stream Extraction:** Building low-latency webhook ingestion architectures that process, convert, and stream multi-part audio file arrays without choking the Node event loop.
+* **Stateful Tool-Driven Orchestration:** Implementing complex agent logic via LangGraph in Python to accurately translate casual instructions into deterministic API executions.
+* **Context Preservation Across Channels:** Tracking multi-turn conversational data over distinct, stateless HTTP webhook instances using decoupled temporary memory states.
+* **Multi-Runtime Data Passing:** Creating clean, decoupled communications between a high-speed JavaScript network edge and a robust Python background processing core.
 
 ---
 
 ## 🎥 Product Demo Video
 
-*(This section will host the live screen-recording showcasing the side-by-side terminal logs, millisecond latency matrices, and real-time physical order delivery execution.)*
+*(This section will host the live screen-recording showcasing the side-by-side terminal logs, millisecond latency matrices, real-time autonomous agent reasoning trace, and the physical completion of a cheap test order.)*
+
+```
