@@ -1,0 +1,37 @@
+[
+  {
+    "restaurant_id": "res_central_biryani_boduppal",
+    "restaurant_name": "Central Biryani Pointe - Boduppal",
+    "cuisine_tags": ["biryani", "rice", "tandoor"],
+    "is_open": true,
+    "delivery_time_mins": 25,
+    "base_delivery_fee": 30,
+    "menu": [
+      { "item_id": "cb_01", "name": "Chicken Dum Biryani", "price": 269, "is_veg": false },
+      { "item_id": "cb_02", "name": "Curd Rice", "price": 149, "is_veg": true }
+    ]
+  },
+  {
+    "restaurant_id": "res_pista_house_boduppal",
+    "restaurant_name": "Pista House - Boduppal",
+    "cuisine_tags": ["biryani", "shawarma", "bakery"],
+    "is_open": true,
+    "delivery_time_mins": 18,
+    "base_delivery_fee": 35,
+    "menu": [
+      { "item_id": "ph_01", "name": "Zafrani Chicken Dum Biryani Single", "price": 149, "is_veg": false },
+      { "item_id": "ph_02", "name": "Chicken Shawarma", "price": 140, "is_veg": false }
+    ]
+  },
+  {
+    "restaurant_id": "res_abhiruchi_boduppal",
+    "restaurant_name": "Abhiruchi Hotel - Boduppal",
+    "cuisine_tags": ["south indian", "andhra", "rice"],
+    "is_open": true,
+    "delivery_time_mins": 22,
+    "base_delivery_fee": 20,
+    "menu": [
+      { "item_id": "ab_01", "name": "Andhra Meals Combo", "price": 180, "is_veg": true }
+    ]
+  }
+]
