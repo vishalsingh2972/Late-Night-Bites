@@ -1,8 +1,4 @@
-Here is a comprehensive, production-grade `README.md` for **Late Night Bites**. It maps out the exact hybrid multi-runtime architecture (TypeScript + Python) needed to handle raw WebSockets alongside structured asynchronous agent operations.
-
----
-
-# 🌾 Late Night Bites (లేట్ నైట్ బైట్స్ / लेट नाइट बाइट्स)
+# 🌶️ Late Night Bites -  For the Late night hunger cravings
 
 > ## Ultra-Low Latency Bidirectional Real-Time Streaming AI Delivery Agent
 > 
