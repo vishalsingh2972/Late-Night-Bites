@@ -26,7 +26,7 @@ flowchart TD
         E -->|Extracted Parameters: Budget/Cravings| G["🐍 FastAPI Business Router (Python)"]
         G -->|State Machine Orchestration| H["🤖 LangGraph Autonomous Coordinator"]
         H -->|Tool Call: Query Open Restaurants| I["🍔 Swiggy Merchant Sandbox Engine"]
-        H -->|Tool Call: Checkout & Place Order| J["💳 Pre-Authorized Payment Engine"]
+        H -->|Tool Call: Checkout & Place Order| J["💳 Pre-Authorized Wallet Ledger"]
     end
     
     J -->|Order Confirmation Webhook| G -->|Push Notification Frame| C
@@ -61,6 +61,20 @@ The user initiates the process by dropping a single, unstructured audio message.
 > 
 > Harshitha receives a clean text summary: *'Done! Ordered Chicken Biryani from Empire. Total ₹240. Will be at your door in 22 mins. Go take a nap, I'll alert you when he hits the gate.'*
 > She takes a 20-minute nap, completely bypasses application logistics, and wakes up directly to a knock on the door with hot food ready.”
+
+---
+
+## 🛠️ Infrastructure Strategy & Constraints Handling
+
+> ### 💡 Architectural Implementation Disclaimer
+> 
+> 
+> To maximize architectural reliability, decouple external service limits, and adhere to compliance boundaries during development, this system utilizes a professional modular simulation layer for its external endpoints:
+> * **The Commerce Layer:** Commercial delivery networks operate within private, closed API networks. To evaluate the agent's real-time decision loops, this system integrates with a stateful Python sandbox environment that mirrors active merchant pricing matrices, dish availabilities, and regional delivery metrics.
+> * **The Payment Layer:** Financial regulations and UPI authentication frameworks prevent automated headless debits without physical multi-factor steps. The transactional checkout engine uses a stateful, pre-funded database wallet ledger to validate transaction confirmation, account adjustments, and receipt management.
+> * **The Real-World Validation:** For demonstration purposes, the autonomous pipeline runs natively while the user places a low-cost, matching physical order via the retail consumer app interface to verify physical delivery completion.
+> 
+> 
 
 ---
 
